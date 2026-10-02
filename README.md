@@ -35,3 +35,13 @@ Working outputs are receive indexes 2 through 21. The steps are 10, 25, 50, 100,
 
 The live CSV is on the desk as `stress-test-2026-10-02.csv`. This note will get the totals when the run reaches its final line.
 
+## Open in progress, 07:44 UTC
+
+Muon-10 was the only public node under the 92,000 mempool line. It reported kaspad 2.1.0, synced, mempool about 79,600. Vector-10 was about 145,000. Proton-10, neutrino-10, and boson-10 were about 393,000. Submits stay on muon-10.
+
+1,833 coins totaling 463,558.8526 tKAS were already on receive indexes 2 through 21 from the earlier fan-out, which had accepted its batches at 100 sompi per gram with no rejects. This open uses those coins. It does not cut more from index 0. Index 0 still held about 2,005,246 tKAS, above the 100,000 reserve.
+
+A second spender on the same wallet was submitting at the same time, with no reserve. Its transactions had already spent the coins this open tried to hop, so the first 10 tx/s submits were rejected as already in the mempool. That spender was stopped. Muon then crossed 85,000 and this open paused there, which is the planned pause. It stops if that pause lasts about two minutes.
+
+The five rate steps and the 60-minute hold have not finished. Totals, fees, and the highest stable rate will be added when the final line is written.
+
