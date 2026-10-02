@@ -2,44 +2,36 @@
 
 **Experimental. Not advice.** Testnet-10 only. This note has no keys, no addresses, and no transaction ids.
 
-Full gusto is a hosted tic-tac-toe run: first-seat wins, second-seat wins, and draws, then claims. It is not the mass sender. The host is the public tic-tac-toe guest. This repo did not submit those transactions and did not run the guest.
+Full gusto is the spend ramp on the funded testnet-10 wallet. No local kaspad was listening. The client uses one synced public wRPC node whose mempool is under 92,000, and it pauses at 85,000.
 
-## What was already true this morning
+## This morning, before the coins arrived
 
-At 08:58 +02 a spend ramp was not started. Two synced kaspad 2.1.0 nodes agreed that receive index 0 held 1.69909802 tKAS in 12 UTXOs. Receive index 1 held 22.715214 tKAS. Indexes 2 through 30 were empty. The mempool had no incoming outputs to index 0. The ramp needed 600,000 tKAS in the split and a 100,000 tKAS reserve. Nothing was submitted. Fees for that attempt were 0.
+At 08:58 +02 the ramp was not started. Two synced kaspad 2.1.0 nodes agreed that receive index 0 held 1.69909802 tKAS in 12 UTXOs. Receive index 1 held 22.715214 tKAS. Indexes 2 through 30 were empty. Nothing was submitted. Fees were 0.
 
-The same index 0 had shown 980,024.00330406 tKAS at 01:07 +02, while the desk mass sender was still running.
+The same index 0 had shown 980,024.00330406 tKAS at 01:07 +02.
 
-## Coins present when this run opened
+## After the coins arrived
 
-A later read, after the new coins had arrived, still on synced kaspad 2.1.0:
+Synced kaspad 2.1.0:
 
 | Node | Virtual DAA | Mempool | Index 0 | UTXOs | Largest UTXO |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | muon-10.kaspa.blue | 585928173 | 37083 | 2,548,420.40226822 tKAS | 11061 | 241.85582082 tKAS |
 | vector-10.kaspa.green | 585928636 | 145636 | 2,838,365.92825357 tKAS | 12278 | 241.85582082 tKAS |
 
-Index 1 was unchanged at 22.715214 tKAS, and its largest coin was 0.997727 tKAS, short of a 1.5 tKAS join. The gap between the two index-0 totals is the two nodes not holding the same mempool. Vector's pool was already past 100,000. Public kaspad 2.1.0 has panicked on insert once a pool configured for 100,000 transactions is already past that line, so this run does not submit to a node at or above 85,000, and it waits to resume until a pool is back under 70,000.
+The gap is the two nodes not holding the same mempool. Vector, proton-10, neutrino-10, and boson-10 were all above 100,000. Public kaspad 2.1.0 has panicked on insert once a pool capped at 100,000 is already past that line. Those four nodes are not used for submits.
 
-At the same moment proton-10, neutrino-10, and boson-10 each reported a mempool around 400,000 and stayed synced. Those pools are above the 100,000 panic line, so they were not used.
+The desk mass sender had started spending the new coins. It was stopped so this ramp would not double-spend them. While it was stopped, muon fell from about 85,000 to 34,043 and the priority quote returned to 100 sompi per gram.
 
-## Brake, then open
+One 45 tKAS payment to receive index 1 was broadcast before the ramp, at 300 sompi per gram. Mass was 2036 and the fee was 610800 sompi. That coin is outside the ramp's working indexes.
 
-The first launch hit `mempool_brake` and submitted nothing. Muon was at about 85,000 and the other public nodes were higher.
+## Ramp open
 
-Muon then fell while the mass sender was held:
+Boot at 2026-10-02T07:18:36Z. Network check passed on all five public nodes. The client kept muon-10, kaspad 2.1.0, synced, mempool 37778.
 
-| Time (UTC) | Mempool | Normal | Priority |
-| --- | ---: | ---: | ---: |
-| 07:13:10 | 45944 | 195 | 901 |
-| 07:13:26 | 34448 | 190 | 601 |
-| 07:13:41 | 34095 | 100 | 100 |
-| 07:13:56 | 34043 | 100 | 100 |
+A second open at 07:19:20Z, after the first fanout had already moved coins into the mempool, read index 0 as 2,333,460.7274 tKAS across 144,538 UTXOs on the first count and then the later count. It selected 2,000 coins totaling 477,500.3901 tKAS and left the rest on index 0, above the 100,000 tKAS reserve. The 800,000 tKAS budget was not reached. Fee tier started at 100 sompi per gram. The first fanout batches were accepted with 0 rejects.
 
-The match client opened on muon-10 at virtual DAA 585933084. The node was synced, network `testnet-10`, mempool 34057, priority 100 sompi per gram. The second-seat fund is 45 tKAS at three times that quote, 300 sompi per gram. Mass was 2036 and the fee was 610800 sompi.
+Working outputs are receive indexes 2 through 21. The steps are 10, 25, 50, 100, and 200 transactions per second, five minutes each, then the highest stable step for 60 minutes. Stable means at least 95 percent accepted and the node still synced. The run stops if the node loses sync, more than 10 percent are rejected for two minutes, free disk on C: drops under 10 GB, or the budget or reserve is hit.
 
-The slate is 30 matches: 12 meant to end First, 9 Second, and 9 Draw. Stake is 1 tKAS. Carrier transactions stay on encoder 0.1.6, which has no feerate argument. On the earlier ten-match run those floors were create 228300, join 227300, each turn 181100, and withdraw 181800 sompi. If a create does not appear on the host, the slate stops instead of opening another game.
+The live CSV is on the desk as `stress-test-2026-10-02.csv`. This note will get the totals when the run reaches its final line.
 
-Claims use the owning seat, start at 969600 sompi, and on a relay-minimum rejection resubmit at three times the required amount.
-
-Match lines and claim rows will be added here when the run finishes. Until then the local client is still playing.
