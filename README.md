@@ -51,3 +51,11 @@ The reserve is off. This open spends receive indexes 0 through 21 until the wall
 
 From 07:52:27Z to 07:52:44Z the open accepted 3,949 transactions and rejected 0. The rate peaked about 239 per second. Muon moved from about 67,000 to about 117,000, and the open paused. At 07:53:14Z muon was about 71,800 and the pause was still on. Queued value was about 570,150 tKAS. Fees counted about 661,719 tKAS. This open started from about 1,492,117 tKAS. It stops when the wallet is empty.
 
+## Full wallet, 08:37 UTC
+
+The 800,000 tKAS budget and the 100,000 tKAS reserve are off. One spender is running. It spends receive indexes 0 through 39 back onto those same keys. Submits stay on muon-10. The pause is 85,000 and the resume line is 70,000.
+
+Indexes 22 through 39 still held 509,441.5 tKAS in 1,781 UTXOs, mostly pieces near 300 tKAS. A scan at 08:33:31Z covered indexes 0 through 39: 143,499 UTXOs and 539,204.92 tKAS. At 08:37:20Z the same process was paused with 538,192.36 tKAS still queued, 0 accepted and 0 rejected in that life. Muon-10 was kaspad 2.1.0, synced, mempool about 97,600, down from about 99,000. Vector-10 was about 210,000. Proton-10, neutrino-10, and boson-10 were about 450,000. Those four stay unused.
+
+The fee quote at the pause was normal 363 and priority 3,109 sompi per gram. Free disk on the desk was 638 GB. Earlier the same drain, on indexes 0 through 21, accepted about 240 transactions per second with 0 rejects until muon filled. This open waits under 70,000, then spends until the queued coins cannot pay a fee.
+
