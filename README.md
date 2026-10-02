@@ -45,3 +45,9 @@ A second spender on the same wallet was submitting at the same time, with no res
 
 The five rate steps and the 60-minute hold have not finished. Totals, fees, and the highest stable rate will be added when the final line is written.
 
+## Max drain, 07:52 UTC
+
+The reserve is off. This open spends receive indexes 0 through 21 until the wallet is empty. Submits stay on muon-10. The pause is 85,000 and the resume line is 70,000. The fee rate in use is 200,000 sompi per gram. A live priority quote was several million sompi per gram. These submits were still accepted at 200,000.
+
+From 07:52:27Z to 07:52:44Z the open accepted 3,949 transactions and rejected 0. The rate peaked about 239 per second. Muon moved from about 67,000 to about 117,000, and the open paused. At 07:53:14Z muon was about 71,800 and the pause was still on. Queued value was about 570,150 tKAS. Fees counted about 661,719 tKAS. This open started from about 1,492,117 tKAS. It stops when the wallet is empty.
+
